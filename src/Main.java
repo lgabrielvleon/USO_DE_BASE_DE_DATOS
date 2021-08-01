@@ -1,31 +1,33 @@
 import DAO.*;
 import Entity.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Categoria objCategoria = new Categoria();
         Scanner scanner = new Scanner(System.in);
-        CategoriaDAO CategoriaDAO = new CategoriaDAO();
+        CategoriaDAO CategoriaDAO;
         Ubicacion objubicacion = new Ubicacion();
-        UbicacionDAO UbicacionDAO = new UbicacionDAO();
+        UbicacionDAO UbicacionDAO;
         Libro objlibro = new Libro();
-        LibroDAO LibroDAO = new LibroDAO();
+        LibroDAO LibroDAO;
         Persona objpersona = new Persona();
-        PersonaDAO PersonaDAO = new PersonaDAO();
+        PersonaDAO PersonaDAO;
         Prestamo objprestamo = new Prestamo();
-        PrestamoDAO PrestamoDAO = new PrestamoDAO();
+        PrestamoDAO PrestamoDAO;
         Usuario objusuario = new Usuario();
-        UsuarioDAO UsuarioDAO = new UsuarioDAO();
+        UsuarioDAO UsuarioDAO;
         Conexion Conexion = new Conexion();
         boolean iniciar = true;
 
-        System.out.println("Bienvenido a Biblioteca");
-        System.out.println("1.Iniciar");
-        System.out.println("2.Salir");
+
 
         while (iniciar) {
+            System.out.println("Bienvenido a Biblioteca");
+            System.out.println("1.Iniciar");
+            System.out.println("2.Salir");
             int option = scanner.nextInt();
             switch (option) {
                 case 1:
@@ -48,7 +50,7 @@ public class Main {
                             System.out.println("4.Eliminar Categoria");
                             System.out.println("5.Listar Categorias");
 
-
+                            CategoriaDAO = new CategoriaDAO();
                             int option2 = scanner.nextInt();
 
                             switch (option2) {
@@ -56,7 +58,8 @@ public class Main {
                                     try {
                                         System.out.println("Consultar");
                                         System.out.println("Indica el ID de la Categoria a consultar");
-                                        Categoria consultada = CategoriaDAO.Consultar(scanner.nextInt());
+                                        Categoria objCategoriaRes = CategoriaDAO.Consultar(scanner.nextInt());
+                                        System.out.println(objCategoriaRes.toString());
                                     } catch (Exception e) {
                                         System.out.println("Error " + e);
                                     }
@@ -95,6 +98,17 @@ public class Main {
                                         System.out.println("ERROR" + e);
                                     }
                                     break;
+                                case 5:
+                                    try{
+                                        System.out.println("Lista de Categorias");
+                                        System.out.println("=============================");
+                                        ArrayList<Categoria> listCategoria = CategoriaDAO.list();
+                                        for (int i=0; i<listCategoria.size();i++){
+                                            System.out.println(listCategoria.get(i).toString());
+                                        }
+                                    }catch (Exception e){
+                                        System.out.println("Error: "+ e);
+                                    }
                             }
 
 
@@ -106,11 +120,20 @@ public class Main {
                             System.out.println("3.Modificar Ubicacion");
                             System.out.println("4.Eliminar Ubicacion");
                             System.out.println("5.Listar Ubicaciones");
-
+                            UbicacionDAO = new UbicacionDAO();
                             int option3 = scanner.nextInt();
                             switch (option3) {
                                 case 1:
-                                    System.out.println("Consultar");
+
+                                    try {
+                                        System.out.println("Consultar");
+                                        System.out.println("Indica el ID a Consultar");
+                                        Ubicacion objUbicacionCon= UbicacionDAO.Consultar(scanner.nextInt());
+                                        System.out.println(objUbicacionCon.toString());
+                                    }catch (Exception e){
+                                        System.out.println("ERROR: "+e);
+                                    }
+
                                     break;
 
                                 case 2:
@@ -123,7 +146,6 @@ public class Main {
                                         objubicacion.setRegion(scanner.next());
                                         System.out.println("Indique la Ciudad");
                                         objubicacion.setCiudad(scanner.next());
-
                                         UbicacionDAO.Registrar(objubicacion);
                                     }catch (Exception err){
                                         System.out.println("ERROR"+ err);
@@ -156,6 +178,17 @@ public class Main {
                                     }
 
                                     break;
+                                case 5:
+                                    try{
+                                        System.out.println("Lista de Ubicaciones");
+                                        ArrayList<Ubicacion> listUbicacion = UbicacionDAO.list();
+                                        for (int i=0; i<listUbicacion.size();i++){
+                                            System.out.println(listUbicacion.get(i).toString());
+                                        }
+                                    }catch (Exception e){
+                                        System.out.println("ERROR: "+ e);
+                                    }
+                                    break;
                             }
 
                             break;
@@ -166,13 +199,20 @@ public class Main {
                             System.out.println("3.Modificar Libro");
                             System.out.println("4.Eliminar Libro");
                             System.out.println("5.Listar Libros");
+                            LibroDAO =new LibroDAO();
 
                             int option4 = scanner.nextInt();
 
                             switch (option4) {
                                 case 1:
-                                    System.out.println("Consultar");
-                                    System.out.println("Indique el ID del Libro a Consultar");
+                                    try {
+                                        System.out.println("Consultar");
+                                        System.out.println("Indique el ID del Libro a Consultar");
+                                        Libro objLibroCon= LibroDAO.Consultar(scanner.nextInt());
+                                        System.out.println(objLibroCon.toString());
+                                    }catch (Exception e){
+                                        System.out.println("ERROR: "+e);
+                                    }
                                     break;
 
                                 case 2:
@@ -223,7 +263,17 @@ public class Main {
                                     } catch (Exception e) {
                                         System.out.println("ERROR" + e);
                                     }
-
+                                    break;
+                                case 5:
+                                    try {
+                                        System.out.println("Listar de Libros");
+                                        ArrayList<Libro> listLibro=new LibroDAO().list();
+                                        for (int i=0; i<listLibro.size();i++){
+                                            System.out.println(listLibro.get(i).toString());
+                                        }
+                                    }catch (Exception e){
+                                        System.out.println("ERROR: "+e);
+                                    }
                                     break;
                             }
                             break;
@@ -234,13 +284,22 @@ public class Main {
                             System.out.println("3.Modificar Persona");
                             System.out.println("4.Eliminar Persona");
                             System.out.println("5.Listar Personas");
+                            PersonaDAO =new PersonaDAO();
 
                             int option5 = scanner.nextInt();
 
                             switch (option5) {
                                 case 1:
-                                    System.out.println("Consultar");
-                                    System.out.println("Indique el ID del Persona a Consultar");
+                                    try {
+                                        System.out.println("Consultar");
+                                        System.out.println("Indique el ID del Persona a Consultar");
+                                        Persona objPersonaCon=PersonaDAO.Consultar(scanner.nextInt());
+                                        System.out.println(objPersonaCon.toString());
+                                    }catch (Exception e)
+                                    {
+                                        System.out.println("ERROR: "+e);
+                                    }
+
                                     break;
 
                                 case 2:
@@ -292,8 +351,17 @@ public class Main {
                                     } catch (Exception e) {
                                         System.out.println("ERROR" + e);
                                     }
-
-
+                                    break;
+                                case 5:
+                                    try {
+                                        System.out.println("Listar Personas");
+                                        ArrayList<Persona> listpersona= PersonaDAO.list();
+                                        for (int i=0;i< listpersona.size();i++){
+                                            System.out.println(listpersona.get(i).toString());
+                                        }
+                                    }catch (Exception e){
+                                        System.out.println("ERROR: "+e);
+                                    }
                                     break;
                             }
                             break;
@@ -308,6 +376,7 @@ public class Main {
                             System.out.println("3.Modificar Prestamo");
                             System.out.println("4.Eliminar Prestamo");
                             System.out.println("5.Listar Prestamo");
+                            PrestamoDAO =new PrestamoDAO();
 
 
                             int option6 = scanner.nextInt();
@@ -317,6 +386,8 @@ public class Main {
                                     try {
                                         System.out.println("Consultar");
                                         System.out.println("Indica el ID del Prestamo a consultar");
+                                        Prestamo objPrestamoCon= PrestamoDAO.Consultar(scanner.nextInt());
+                                        System.out.println(objPrestamoCon.toString());
                                     } catch (Exception e) {
                                         System.out.println("Error " + e);
                                     }
@@ -351,9 +422,20 @@ public class Main {
                                     } catch (Exception e) {
                                         System.out.println("ERROR" + e);
                                     }
-
+                                    break;
+                                case 5:
+                                    try {
+                                        System.out.println("Listar Prestamos");
+                                        ArrayList<Prestamo> listprestamo= PrestamoDAO.list();
+                                        for (int i=0;i< listprestamo.size();i++){
+                                            System.out.println(listprestamo.get(i).toString());
+                                        }
+                                    }catch (Exception e){
+                                        System.out.println("ERROR: "+e);
+                                    }
                                     break;
                             }
+                            break;
                         case 7:
                             System.out.println("Usuario");
                             System.out.println("1.Consultar Usuario");
@@ -361,13 +443,21 @@ public class Main {
                             System.out.println("3.Modificar Usuario");
                             System.out.println("4.Eliminar Usuario");
                             System.out.println("5.Listar Usuarios");
+                            UsuarioDAO =new UsuarioDAO();
 
                             int option7 = scanner.nextInt();
 
                             switch (option7) {
                                 case 1:
-                                    System.out.println("Consultar");
-                                    System.out.println("Indique el ID del Usuario a Consultar");
+                                    try {
+                                        System.out.println("Consultar");
+                                        System.out.println("Indique el ID del Usuario a Consultar");
+                                        Usuario objUsuarioCon= UsuarioDAO.Consultar(scanner.nextInt());
+                                        System.out.println(objUsuarioCon.toString());
+                                    }catch (Exception e){
+                                        System.out.println("ERROR: "+e);
+                                    }
+
                                     break;
 
                                 case 2:
@@ -411,13 +501,21 @@ public class Main {
                                     } catch (Exception e) {
                                         System.out.println("ERROR" + e);
                                     }
-
+                                    break;
+                                case 5:
+                                    try {
+                                        System.out.println("Listar Usuarios");
+                                        ArrayList<Usuario> listUsuario= UsuarioDAO.list();
+                                        for (int i=0;i< listUsuario.size();i++){
+                                            System.out.println(listUsuario.get(i).toString());
+                                        }
+                                    }catch (Exception e){
+                                        System.out.println("ERROR: "+e);
+                                    }
                                     break;
                             }
-
                             break;
                     }
-
                     break;
                         case 2:
                             System.out.println("Saliste");
