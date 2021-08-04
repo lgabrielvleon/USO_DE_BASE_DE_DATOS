@@ -2,6 +2,7 @@ package DAO;
 
 import Entity.Persona;
 import Entity.Prestamo;
+import Entity.Usuario;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +23,13 @@ public class PrestamoDAO {
             if (rs.next()){
                 objprestamo=new Prestamo(
                         rs.getInt("Id_Prestamo"),
-                        rs.getInt("Id_Usuario"),
+                        new Usuario(
+                                rs.getInt("Id_Usuario"),
+                                0,
+                                "",
+                                "",
+                                ""
+                        ),
                         rs.getString("Date_prestamo")
                 );
             }
@@ -38,7 +45,7 @@ public class PrestamoDAO {
         try {
             String sql="CALL sp_prestamo_insert (?);";
             PreparedStatement ps=con.getCon().prepareStatement(sql);
-            ps.setInt(1,objprestamo.getId_Usuario());
+            ps.setInt(1,objprestamo.getId_Usuario().getID());
             ps.execute();
         }catch (SQLException e){
             System.out.println("SQL ERROR"+e);
@@ -50,7 +57,7 @@ public class PrestamoDAO {
             String sql="CALL sp_prestamo_update(?,?);";
             PreparedStatement ps=con.getCon().prepareStatement(sql);
             ps.setInt(1,objprestamo.getID());
-            ps.setInt(2, objprestamo.getId_Usuario());
+            ps.setInt(2, objprestamo.getId_Usuario().getID());
             ps.executeUpdate();
         }catch (SQLException e){
             System.out.println("SQL ERROR"+e);
@@ -76,7 +83,12 @@ public class PrestamoDAO {
             while (rs.next()){
                     Prestamo objTmpPrestamo=new Prestamo(
                             rs.getInt(1),
-                            rs.getInt(2),
+                            new Usuario(
+                                    rs.getInt(2),
+                                    0,
+                                    "",
+                                    "",
+                                    ""),
                             rs.getString(3)
                     );
                     listPrestamo.add(objTmpPrestamo);

@@ -2,18 +2,18 @@ package Entity;
 
 public class Prestamo {
     private int ID;
-    private int Id_Usuario;
+    private Usuario objUsuario;
     private String Date_prestamo;
 
     public Prestamo() {
         this.ID = 0;
-        this.Id_Usuario = 0;
+        this.objUsuario = new Usuario();
         this.Date_prestamo = "";
     }
 
-    public Prestamo(int ID, int id_Usuario, String date_prestamo) {
+    public Prestamo(int ID, Usuario objUsuario, String date_prestamo) {
         this.ID = ID;
-        this.Id_Usuario = id_Usuario;
+        this.objUsuario = objUsuario;
         this.Date_prestamo = date_prestamo;
     }
 
@@ -25,12 +25,12 @@ public class Prestamo {
         this.ID = ID;
     }
 
-    public int getId_Usuario() {
-        return Id_Usuario;
+    public Usuario getId_Usuario() {
+        return objUsuario;
     }
 
-    public void setId_Usuario(int id_Usuario) {
-        this.Id_Usuario = id_Usuario;
+    public void setId_Usuario(Usuario objUsuario) {
+        this.objUsuario = objUsuario;
     }
 
     public String getDate_prestamo() {
@@ -45,7 +45,7 @@ public class Prestamo {
     public String toString() {
         return "Prestamo{" +
                 "ID=" + ID +
-                ", Id_Usuario=" + Id_Usuario +
+                ", Id_Usuario=" + objUsuario.getID() +
                 ", Date_prestamo='" + Date_prestamo + '\'' +
                 '}';
     }

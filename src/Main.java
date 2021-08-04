@@ -377,7 +377,7 @@ public class Main {
                             System.out.println("4.Eliminar Prestamo");
                             System.out.println("5.Listar Prestamo");
                             PrestamoDAO =new PrestamoDAO();
-
+                            DetallePrestamoDAO objDetallePrestamoDAO = new DetallePrestamoDAO();
 
                             int option6 = scanner.nextInt();
 
@@ -386,8 +386,12 @@ public class Main {
                                     try {
                                         System.out.println("Consultar");
                                         System.out.println("Indica el ID del Prestamo a consultar");
-                                        Prestamo objPrestamoCon= PrestamoDAO.Consultar(scanner.nextInt());
-                                        System.out.println(objPrestamoCon.toString());
+                                        //Prestamo objPrestamoCon= PrestamoDAO.Consultar(scanner.nextInt());
+                                        ArrayList<DetallePrestamo> lstDetallePrestamo = objDetallePrestamoDAO.getDetallePrestamoReporte(scanner.nextInt());
+                                        for (int i=0; i<lstDetallePrestamo.size(); i++){
+                                            System.out.println(i+"\t"+lstDetallePrestamo.get(i).getObjLibro().getTitle());
+                                        }
+                                        //System.out.println(objPrestamoCon.toString());
                                     } catch (Exception e) {
                                         System.out.println("Error " + e);
                                     }
@@ -397,7 +401,7 @@ public class Main {
                                     objprestamo = new Prestamo();
                                     System.out.println("Registrar");
                                     System.out.println("Indica el ID del Usuario");
-                                    objprestamo.setId_Usuario(scanner.nextInt());
+                                    //objprestamo.setId_Usuario(scanner.nextInt());
 
 
                                     PrestamoDAO.Registrar(objprestamo);
@@ -409,7 +413,7 @@ public class Main {
                                     System.out.println("Indica el ID");
                                     objprestamo.setID(scanner.nextInt());
                                     System.out.println("Indica el ID del Usuario");
-                                    objprestamo.setId_Usuario(scanner.nextInt());
+                                    //objprestamo.setId_Usuario(scanner.nextInt());
 
                                     PrestamoDAO.Modificar(objprestamo);
 
