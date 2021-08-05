@@ -1,5 +1,6 @@
 package DAO;
 
+import Entity.Categoria;
 import Entity.Libro;
 
 import java.sql.PreparedStatement;
@@ -21,7 +22,11 @@ public class LibroDAO {
             if (rs.next()){
                 objLibro=new Libro(
                         rs.getInt("Id_Libro"),
-                        rs.getInt("Id_Categoria"),
+                        new Categoria(
+                                rs.getInt("Id_Categoria"),
+                                "",
+                                ""
+                        ),
                         rs.getString("Title"),
                         rs.getString("Author"),
                         rs.getString("Editorial"),
@@ -41,7 +46,7 @@ public class LibroDAO {
         try {
             String sql="CALL sp_libro_insert (?,?,?,?,?,?);";
             PreparedStatement ps=con.getCon().prepareStatement(sql);
-            ps.setInt(1,objlibro.getID_Categoria());
+            ps.setInt(1,objlibro.getObjCategoria().getID());
             ps.setString(2,objlibro.getTitle());
             ps.setString(3, objlibro.getAuthor());
             ps.setString(4,objlibro.getEditorial());
@@ -58,7 +63,7 @@ public class LibroDAO {
             String sql="CALL sp_libro_update(?,?,?,?,?,?,?);";
             PreparedStatement ps=con.getCon().prepareStatement(sql);
             ps.setInt(1,objlibro.getID());
-            ps.setInt(2,objlibro.getID_Categoria());
+            ps.setInt(2,objlibro.getObjCategoria().getID());
             ps.setString(3,objlibro.getTitle());
             ps.setString(4, objlibro.getAuthor());
             ps.setString(5, objlibro.getEditorial());
@@ -89,7 +94,11 @@ public class LibroDAO {
             while (rs.next()){
                 Libro objTmpLibro=new Libro(
                         rs.getInt(1),
-                        rs.getInt(2),
+                        new Categoria(
+                                rs.getInt(2),
+                                "",
+                                ""
+                        ),
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),

@@ -25,11 +25,11 @@ public class Prestamo {
         this.ID = ID;
     }
 
-    public Usuario getId_Usuario() {
+    public Usuario getUsuario() {
         return objUsuario;
     }
 
-    public void setId_Usuario(Usuario objUsuario) {
+    public void setUsuario(Usuario objUsuario) {
         this.objUsuario = objUsuario;
     }
 

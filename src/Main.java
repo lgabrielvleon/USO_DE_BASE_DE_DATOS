@@ -219,7 +219,7 @@ public class Main {
                                     objlibro = new Libro();
                                     System.out.println("Registar");
                                     System.out.println("Indica el ID Categoria del Libro");
-                                    objlibro.setID_Categoria(scanner.nextInt());
+                                    objlibro.setObjCategoria(new Categoria(scanner.nextInt(), "", ""));
                                     System.out.println("Indica el Titulo del Libro");
                                     objlibro.setTitle(scanner.next());
                                     System.out.println("Indica el Autor del Libro");
@@ -240,7 +240,7 @@ public class Main {
                                     System.out.println("Indica el ID");
                                     objlibro.setID(scanner.nextInt());
                                     System.out.println("Indica el ID Categoria del Libro");
-                                    objlibro.setID_Categoria(scanner.nextInt());
+                                    objlibro.setObjCategoria(new Categoria(scanner.nextInt(), "", ""));
                                     System.out.println("Indica el Titulo del Libro");
                                     objlibro.setTitle(scanner.next());
                                     System.out.println("Indica el Autor del Libro");
